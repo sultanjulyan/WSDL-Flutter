@@ -31,24 +31,14 @@ class _MyHomePageState extends State<MyHomePage> {
   String request = 'Click send button for check the request';
 
   _callWsdl() async {
-    String soapReq = '''<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.ibm.com/maximo"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:ns2="http://10.60.164.55:9120/telkom.nb.osb.telkomsystem.newoss.ws:tkTasklistind">
-  <SOAP-ENV:Header />
-  <SOAP-ENV:Body>
-    <ns1:tkTasklistind>
-      <ns1:QueryTK_TASKLISTIND>
-        <ns1:TK_TASKLISTINDQuery>
-          <ns1:LABOR>
-            <ns1:LABORCODE>AKUN_SAKTI</ns1:LABORCODE>
-          </ns1:LABOR>
-        </ns1:TK_TASKLISTINDQuery>
-      </ns1:QueryTK_TASKLISTIND>
-    </ns1:tkTasklistind>
-  </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>''';
+    String soapReq = '''<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cti="http://cti.cakrawala-techInc.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cti:ping/>
+   </soapenv:Body>
+</soapenv:Envelope>''';
     http.Response response = await http.post(
-      Uri.parse('https://apigw.telkom.co.id:7777/ws/telkom-myTech-tkTasklistind/1.0?wsdl'),
+      Uri.parse('http://emas.telkom.co.id:8080/dava/DavaInterface?wsdl'),
       headers: {
         'content-type': 'text/xml',
       },
